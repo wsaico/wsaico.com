@@ -30,7 +30,14 @@ const breadcrumb = buildBreadcrumbSchema([
           rel="noopener noreferrer"
           class="spotlight-card bg-[var(--bg-surface)] p-6 no-underline"
         >
-          <p class="font-mono text-xs font-bold text-emerald-500 uppercase">WhatsApp Directo</p>
+          <div class="flex items-center gap-2">
+            <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-white">
+              <svg class="h-4 w-4" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+                <path d="M16.004 3.2c-7.058 0-12.8 5.742-12.8 12.8 0 2.256.592 4.46 1.714 6.404L3.1 29l6.766-1.774A12.74 12.74 0 0 0 16.004 28.8c7.058 0 12.8-5.742 12.8-12.8s-5.742-12.8-12.8-12.8zm0 23.36a10.52 10.52 0 0 1-5.366-1.468l-.384-.228-4.014 1.052 1.072-3.914-.25-.4a10.52 10.52 0 0 1-1.618-5.602c0-5.822 4.738-10.56 10.56-10.56 5.822 0 10.56 4.738 10.56 10.56 0 5.822-4.738 10.56-10.56 10.56zm5.792-7.912c-.318-.16-1.88-.928-2.172-1.034-.292-.106-.504-.16-.716.16-.212.318-.82 1.034-1.006 1.246-.186.212-.37.238-.688.08-.318-.16-1.342-.494-2.556-1.576-.944-.842-1.582-1.882-1.768-2.2-.186-.318-.02-.49.14-.648.144-.144.318-.37.478-.556.16-.186.212-.318.318-.53.106-.212.054-.398-.026-.556-.08-.16-.716-1.724-.982-2.36-.258-.62-.52-.536-.716-.546-.186-.01-.398-.01-.61-.01-.212 0-.556.08-.848.398-.292.318-1.112 1.086-1.112 2.65 0 1.562 1.138 3.072 1.298 3.284.16.212 2.24 3.42 5.426 4.796.758.328 1.35.524 1.81.67.76.242 1.452.208 2 .126.61-.09 1.88-.768 2.144-1.51.266-.742.266-1.378.186-1.51-.08-.132-.292-.212-.61-.37z" />
+              </svg>
+            </span>
+            <p class="font-mono text-xs font-bold text-[#25D366] uppercase">WhatsApp Directo</p>
+          </div>
           <p class="mt-3 text-xl font-extrabold text-[var(--text-primary)]">{SITE_CONFIG.contact.phoneDisplay}</p>
           <p class="mt-2 text-sm text-[var(--text-muted)]">Respuesta rápida para consultas puntuales o agendar una reunión.</p>
         </a>
