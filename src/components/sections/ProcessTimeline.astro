@@ -1,0 +1,78 @@
+---
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+
+const steps = [
+  {
+    num: '01',
+    title: 'Conversación inicial',
+    detail: 'Analizamos tu operación actual, los cuellos de botella y qué proceso necesitas ordenar o automatizar.',
+  },
+  {
+    num: '02',
+    title: 'Propuesta y alcance por escrito',
+    detail: 'Recibes una especificación clara: módulos incluidos, plazos reales, arquitectura y valor dividido por hitos.',
+  },
+  {
+    num: '03',
+    title: 'Diseño y prototipo validable',
+    detail: 'Validas las pantallas y flujos clave antes de escribir la lógica completa, evitando sorpresas.',
+  },
+  {
+    num: '04',
+    title: 'Desarrollo por entregas semanales',
+    detail: 'Ves avances reales en un entorno de pruebas cada semana con código limpio y pruebas funcionales.',
+  },
+  {
+    num: '05',
+    title: 'Lanzamiento, capacitación y soporte',
+    detail: 'Despliegue en producción, capacitación a tu equipo y acompañamiento técnico para nuevas mejoras.',
+  },
+];
+---
+
+<section class="py-18 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <div class="lg:sticky lg:top-28">
+          <SectionHeader
+            eyebrow="Metodología de Trabajo"
+            title="Un proceso claro de 5 etapas, sin cajas negras."
+            description="Sabes exactamente qué estamos construyendo, cuánto avanza cada semana y qué recibes en cada hito."
+          />
+          <div class="mt-8">
+            <a href="/proceso" class="btn-secondary">
+              Ver detalles del proceso y pagos por hitos
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative lg:col-span-7">
+        <div class="relative space-y-6 pl-8 before:absolute before:top-3 before:bottom-3 before:left-3 before:w-px before:bg-gradient-to-b before:from-[#2563EB] before:via-[#2563EB]/40 before:to-transparent">
+          {
+            steps.map((step) => (
+              <div class="spotlight-card relative p-6">
+                <span
+                  class="absolute top-7 -left-[1.85rem] flex h-6 w-6 items-center justify-center rounded-full border border-[var(--accent-primary)] bg-[var(--bg-canvas)] font-mono text-[10px] font-bold text-[var(--accent-primary)]"
+                  aria-hidden="true"
+                >
+                  {step.num}
+                </span>
+                <p class="font-mono text-xs font-semibold text-[var(--accent-primary)]">
+                  ETAPA {step.num}
+                </p>
+                <h3 class="mt-1.5 text-lg font-bold text-[var(--text-primary)]">
+                  {step.title}
+                </h3>
+                <p class="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
+                  {step.detail}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

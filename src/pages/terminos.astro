@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '@/config/site';
+---
+
+<BaseLayout
+  title="Términos de Servicio | WSAICO"
+  description="Condiciones generales de uso del sitio web wsaico.com y contratación de servicios de desarrollo."
+>
+  <section class="py-16 sm:py-24">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-extrabold text-[var(--text-primary)] sm:text-4xl">Términos de Servicio</h1>
+      <div class="mt-8 space-y-5 text-sm leading-relaxed text-[var(--text-secondary)]">
+        <p>
+          El contenido publicado en <strong>wsaico.com</strong> tiene carácter informativo sobre los servicios de ingeniería de software, consultoría técnica y plataformas desarrolladas por <strong>{SITE_CONFIG.name}</strong>.
+        </p>
+        <p>
+          Todo proyecto de desarrollo se formaliza mediante propuesta de alcance por escrito, cronograma de entregas y acuerdo de hitos aprobado por el cliente antes del inicio de ejecución.
+        </p>
+        <p>
+          Las demostraciones públicas de sistemas como <strong>Gestor 360°</strong> e <strong>Inspector 360°</strong> están destinadas exclusivamente a evaluación funcional. Para consultas comerciales o soporte, escribe a <a href={`mailto:${SITE_CONFIG.contact.email}`} class="text-[var(--accent-primary)] underline">{SITE_CONFIG.contact.email}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

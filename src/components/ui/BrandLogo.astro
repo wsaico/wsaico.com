@@ -1,0 +1,51 @@
+---
+interface Props {
+  variant?: 'auto' | 'dark-surface' | 'light-surface';
+  class?: string;
+}
+
+const { variant = 'auto', class: className = 'h-9 sm:h-10' } = Astro.props;
+---
+
+<a
+  href="/"
+  class="group inline-flex items-center focus-visible:outline-none"
+  aria-label="WSAICO — Tecnología y Soluciones Digitales"
+>
+  {
+    variant === 'dark-surface' ? (
+      <img
+        src="/brand/logo-dark.png"
+        alt="WSAICO — Tecnología y Soluciones Digitales"
+        width="260"
+        height="52"
+        class:list={['w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]', className]}
+      />
+    ) : variant === 'light-surface' ? (
+      <img
+        src="/brand/logo-light.png"
+        alt="WSAICO — Tecnología y Soluciones Digitales"
+        width="260"
+        height="52"
+        class:list={['w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]', className]}
+      />
+    ) : (
+      <>
+        <img
+          src="/brand/logo-light.png"
+          alt="WSAICO — Tecnología y Soluciones Digitales"
+          width="260"
+          height="52"
+          class:list={['logo-for-light w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]', className]}
+        />
+        <img
+          src="/brand/logo-dark.png"
+          alt="WSAICO — Tecnología y Soluciones Digitales"
+          width="260"
+          height="52"
+          class:list={['logo-for-dark w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]', className]}
+        />
+      </>
+    )
+  }
+</a>

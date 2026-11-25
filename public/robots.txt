@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /gracias
+
+Sitemap: https://wsaico.com/sitemap-index.xml

@@ -1,0 +1,64 @@
+/* Design Tokens Oficiales — Brandbook WSAICO (#0B1B3F, #2563EB, #64748B, #F8FAFC) */
+
+:root,
+html[data-theme='light'] {
+  color-scheme: light;
+
+  --bg-canvas: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-2: #eef4ff;
+  --bg-elevated: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.88);
+
+  --text-primary: #0b1b3f;
+  --text-secondary: #1e293b;
+  --text-muted: #475569;
+  --text-subtle: #64748b;
+
+  --accent-primary: #2563eb;
+  --accent-primary-hover: #1d4ed8;
+  --accent-primary-soft: rgba(37, 99, 235, 0.1);
+  --accent-glow: rgba(37, 99, 235, 0.28);
+
+  --border-subtle: rgba(11, 27, 63, 0.09);
+  --border-strong: rgba(11, 27, 63, 0.18);
+  --border-accent: rgba(37, 99, 235, 0.55);
+
+  --shadow-card: 0 20px 45px -15px rgba(11, 27, 63, 0.08), 0 4px 14px -4px rgba(11, 27, 63, 0.05);
+  --shadow-glow: 0 10px 30px -6px rgba(37, 99, 235, 0.45);
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg-canvas: #04091a;
+  --bg-surface: #0b1b3f;
+  --bg-surface-2: #0f2452;
+  --bg-elevated: rgba(13, 31, 71, 0.82);
+  --bg-glass: rgba(8, 19, 46, 0.82);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+
+  --accent-primary: #2563eb;
+  --accent-primary-hover: #3b82f6;
+  --accent-primary-soft: rgba(37, 99, 235, 0.18);
+  --accent-glow: rgba(37, 99, 235, 0.45);
+
+  --border-subtle: rgba(148, 163, 184, 0.16);
+  --border-strong: rgba(148, 163, 184, 0.28);
+  --border-accent: rgba(59, 130, 246, 0.65);
+
+  --shadow-card: 0 24px 55px -15px rgba(2, 6, 23, 0.85);
+  --shadow-glow: 0 10px 36px -6px rgba(37, 99, 235, 0.55);
+}
+
+:root {
+  --font-sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --radius-card: 1.5rem;
+  --radius-pill: 9999px;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}

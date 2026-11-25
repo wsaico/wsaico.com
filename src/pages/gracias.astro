@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '@/config/site';
+---
+
+<BaseLayout
+  title="Solicitud Recibida | WSAICO"
+  description="Gracias por solicitar tu cotización en WSAICO. Te responderemos en menos de 24 horas hábiles."
+  noindex={true}
+>
+  <section class="py-20 sm:py-28">
+    <div class="mx-auto max-w-2xl px-4 text-center sm:px-6">
+      <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-500/15 text-emerald-400">
+        <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+      </div>
+
+      <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-4xl">
+        Recibí tu solicitud correctamente.
+      </h1>
+      <p class="mt-4 text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">
+        Revisaré el alcance de tu proyecto y te escribiré por correo o WhatsApp en menos de 24 horas hábiles con los siguientes pasos.
+      </p>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/" class="btn-secondary">Volver al inicio</a>
+        <a href={SITE_CONFIG.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" class="btn-primary">
+          Adelantar detalles por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

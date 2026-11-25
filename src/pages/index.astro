@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero2027 from '@/components/sections/Hero2027.astro';
+import TrustStrip from '@/components/sections/TrustStrip.astro';
+import RealMetrics from '@/components/sections/RealMetrics.astro';
+import BentoServices from '@/components/sections/BentoServices.astro';
+import FeaturedProjects from '@/components/sections/FeaturedProjects.astro';
+import ProcessTimeline from '@/components/sections/ProcessTimeline.astro';
+import RecentBlog from '@/components/sections/RecentBlog.astro';
+import FaqSection from '@/components/sections/FaqSection.astro';
+import FinalCta from '@/components/sections/FinalCta.astro';
+import { buildFaqSchema, type FaqItem } from '@/lib/schema';
+
+const homeFaqs: FaqItem[] = [
+  {
+    question: '¿Cómo es el proceso para iniciar un proyecto a medida?',
+    answer:
+      'Iniciamos con una reunión breve para entender tu operación, definimos una propuesta con alcance cerrado por escrito, validamos un prototipo visual y desarrollamos con entregas funcionales cada semana.',
+  },
+  {
+    question: '¿Puedo probar Gestor 360° o Inspector 360° antes de cotizar un sistema similar?',
+    answer:
+      'Sí. Ambos sistemas tienen acceso público en vivo para que explores su velocidad, flujo operativo e interfaces.',
+  },
+  {
+    question: '¿Cómo se manejan los pagos y la propiedad del código fuente?',
+    answer:
+      'Cada proyecto se divide por hitos ligados a entregables visibles. Al concluir, el repositorio y la base de datos quedan bajo propiedad de tu empresa, sin licencias mensuales por usuario.',
+  },
+  {
+    question: '¿Qué tecnologías utilizas para asegurar rendimiento y escalabilidad?',
+    answer:
+      'Desarrollo con código limpio usando Next.js, Astro 5, React Native / Expo, TypeScript estricto, Supabase (PostgreSQL) y despliegue en Vercel o Cloudflare.',
+  },
+];
+
+const faqSchema = buildFaqSchema(homeFaqs);
+---
+
+<BaseLayout
+  title="WSAICO — Desarrollo de Sistemas Web, Apps Móviles y Soluciones Digitales"
+  description="Más de 10 años desarrollando sistemas web a medida, aplicaciones móviles, automatización de procesos y SEO técnico con código limpio y tecnología actual."
+  schemas={[faqSchema]}
+>
+  <Hero2027 />
+  <TrustStrip />
+  <RealMetrics />
+  <BentoServices />
+  <FeaturedProjects />
+  <ProcessTimeline />
+  <RecentBlog />
+  <FaqSection items={homeFaqs} />
+  <FinalCta />
+</BaseLayout>

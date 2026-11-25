@@ -1,0 +1,150 @@
+---
+import BrandLogo from '@/components/ui/BrandLogo.astro';
+import { SITE_CONFIG } from '@/config/site';
+import { t } from '@/lib/i18n';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header id="site-header" class="sticky top-0 z-50 w-full bg-[var(--bg-glass)] backdrop-blur-xl border-b border-[var(--border-subtle)] transition-colors duration-300">
+  <div class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+    <!-- Logo Oficial Extraído del Brandbook -->
+    <BrandLogo class="h-9 sm:h-11" />
+
+    <!-- Cápsula de Navegación Oscura (#0B1B3F) inspirada en la referencia -->
+    <nav
+      aria-label={t('navLabel')}
+      class="hidden items-center gap-1 rounded-full bg-[#0B1B3F] px-5 py-2 shadow-lg ring-1 ring-white/10 lg:flex"
+    >
+      {
+        SITE_CONFIG.nav.map((item) => {
+          const isActive =
+            currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+          return (
+            <a
+              href={item.href}
+              aria-current={isActive ? 'page' : undefined}
+              class:list={[
+                'relative rounded-full px-4 py-1.5 text-sm font-semibold transition-all duration-200',
+                isActive
+                  ? 'text-white after:absolute after:inset-x-3.5 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-[#3B82F6]'
+                  : 'text-slate-300 hover:text-white',
+              ]}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <!-- Acciones Derecha: Selector de Tema + Botón Cotizar -->
+    <div class="flex items-center gap-2.5">
+      <button
+        type="button"
+        id="theme-toggle"
+        aria-label={t('themeToggle')}
+        class="inline-flex h-10 cursor-pointer items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--bg-surface)] px-3.5 text-xs font-bold text-[var(--text-primary)] shadow-sm transition-all hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)]"
+      >
+        <svg
+          class="theme-icon-sun hidden h-4 w-4 text-amber-400"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+        </svg>
+        <svg
+          class="theme-icon-moon h-4 w-4 text-[#2563EB]"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        </svg>
+        <span class="theme-label-text hidden sm:inline">Oscuro</span>
+      </button>
+
+      <a
+        href="/cotizar"
+        class="btn-primary hidden sm:inline-flex !py-2.5 !px-5 !text-sm"
+      >
+        <span>Cotizar</span>
+        <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/20">
+          <svg
+            class="h-3.5 w-3.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </span>
+      </a>
+
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        aria-label={t('openMenu')}
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+        class="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[var(--border-strong)] bg-[var(--bg-surface)] text-[var(--text-primary)] lg:hidden"
+      >
+        <svg
+          class="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú Móvil -->
+  <div
+    id="mobile-drawer"
+    class="hidden border-t border-[var(--border-subtle)] bg-[#0B1B3F] px-4 py-5 text-white lg:hidden"
+  >
+    <nav aria-label="Navegación móvil" class="flex flex-col gap-1.5">
+      {
+        SITE_CONFIG.nav.map((item) => {
+          const isActive =
+            currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+          return (
+            <a
+              href={item.href}
+              aria-current={isActive ? 'page' : undefined}
+              class:list={[
+                'rounded-xl px-4 py-3 text-base font-semibold transition-colors',
+                isActive ? 'bg-[#2563EB] text-white' : 'text-slate-200 hover:bg-white/10',
+              ]}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+      <a href="/cotizar" class="btn-primary mt-3 w-full justify-center">
+        Solicitar cotización
+      </a>
+    </nav>
+  </div>
+</header>

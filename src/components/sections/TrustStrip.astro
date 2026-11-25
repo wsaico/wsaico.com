@@ -1,0 +1,62 @@
+---
+const stackItems = [
+  { name: 'Next.js', icon: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5' },
+  { name: 'Astro 5', icon: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z' },
+  { name: 'TypeScript', icon: 'M16 18l6-6-6-6M8 6l-6 6 6 6' },
+  { name: 'Supabase', icon: 'M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6' },
+  { name: 'React Native', icon: 'M12 18h.01M8 21h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z' },
+  { name: 'PostgreSQL', icon: 'M4 6c0 1.657 3.582 3 8 3s8-1.343 8-3-3.582-3-8-3-8 1.343-8 3zM4 6v12c0 1.657 3.582 3 8 3s8-1.343 8-3V6' },
+  { name: 'Gestor 360°', icon: 'M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z' },
+  { name: 'Inspector 360°', icon: 'M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' },
+];
+---
+
+<section aria-label="Tecnologías y plataformas" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+  <div class="relative overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+    <div class="marquee-track flex w-max items-center gap-10 sm:gap-14">
+      {
+        [...stackItems, ...stackItems].map((item) => (
+          <div class="flex items-center gap-2.5 text-[var(--text-muted)] transition-colors hover:text-[var(--accent-primary)]">
+            <svg
+              class="h-5 w-5 shrink-0 text-[var(--accent-primary)]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.9"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d={item.icon} />
+            </svg>
+            <span class="text-base font-extrabold tracking-tight">{item.name}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  .marquee-track {
+    animation: marquee 30s linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      width: auto;
+    }
+  }
+</style>

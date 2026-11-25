@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FinalCta from '@/components/sections/FinalCta.astro';
+import { SITE_CONFIG } from '@/config/site';
+import { buildBreadcrumbSchema } from '@/lib/schema';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Sobre mí', url: '/sobre-mi' },
+]);
+---
+
+<BaseLayout
+  title="Sobre Wilber Saico — +10 Años Desarrollando Software a Medida | WSAICO"
+  description="Conoce a Wilber Saico, Arquitecto de Software Full-Stack y fundador de WSAICO. Más de 10 años construyendo sistemas web y aplicaciones móviles."
+  schemas={[breadcrumb]}
+>
+  <section class="py-14 sm:py-20">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+      <div class="lg:col-span-5">
+        <div class="relative mx-auto max-w-sm overflow-hidden rounded-[32px] bg-gradient-to-b from-[#0F2452] to-[#0B1B3F] px-6 pt-8 shadow-2xl ring-1 ring-white/10">
+          <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(37,99,235,0.4),transparent_68%)]" aria-hidden="true"></div>
+          <img
+            src="/brand/wilber-cutout.webp"
+            alt="Wilber Saico — Arquitecto de Software en WSAICO"
+            width="475"
+            height="628"
+            class="relative z-10 mx-auto block h-auto w-full object-contain object-bottom"
+          />
+        </div>
+      </div>
+
+      <div class="lg:col-span-7">
+        <span class="inline-flex items-center gap-2 rounded-full bg-[var(--accent-primary-soft)] px-3.5 py-1.5 font-mono text-xs font-bold text-[var(--accent-primary)] uppercase">
+          {SITE_CONFIG.name} · Arquitectura Full-Stack
+        </span>
+        <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.12] sm:text-4xl lg:text-5xl">
+          Soy Wilber Saico. Más de 10 años transformando procesos complejos en software claro.
+        </h1>
+
+        <div class="mt-6 space-y-4 text-base leading-relaxed text-[var(--text-secondary)]">
+          <p>
+            A lo largo de más de una década desarrollando sistemas en producción, he ayudado a empresas a resolver un problema recurrente: equipos que pierden horas valiosas entre hojas de cálculo frágiles, procesos manuales y herramientas que no conversan entre sí.
+          </p>
+          <p>
+            Mi enfoque en <strong>WSAICO</strong> es directo: escribir <strong>código limpio con tecnología actual</strong> (Next.js, Astro, React Native, TypeScript y Supabase/PostgreSQL) para construir plataformas rápidas, seguras y fáciles de usar.
+          </p>
+          <p>
+            Ese estándar de ingeniería respalda sistemas en vivo como <strong>Gestor 360°</strong>, <strong>Inspector 360°</strong> y <strong>Lumio Finance</strong>.
+          </p>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-3.5">
+          <a href="/cotizar" class="btn-primary">Conversar sobre tu proyecto</a>
+          <a href="/proyectos" class="btn-secondary">Ver sistemas en producción</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FinalCta />
+</BaseLayout>

@@ -1,0 +1,58 @@
+---
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+
+const differentiators = [
+  {
+    code: '01',
+    title: 'Trato directo con quien programa tu sistema',
+    description:
+      'No pasas por vendedores ni intermediarios que malinterpretan tus requerimientos. Conversas directamente con el arquitecto responsable de principio a fin.',
+  },
+  {
+    code: '02',
+    title: 'Código limpio y tecnología actual',
+    description:
+      'Construido con TypeScript estricto, Next.js, Astro, React Native y PostgreSQL/Supabase. Cero código espagueti difícil de mantener mañana.',
+  },
+  {
+    code: '03',
+    title: 'Propiedad total de tu software y datos',
+    description:
+      'Tu base de datos y repositorio pertenecen a tu empresa. Sin tarifas mensuales abusivas por cada nuevo usuario que agregues.',
+  },
+  {
+    code: '04',
+    title: 'Enfoque práctico en resultados operativos',
+    description:
+      'Más de 10 años resolviendo necesidades reales en campo y oficina: desde inspecciones SSOMA bajo Ley N.° 29783 hasta paneles gerenciales en tiempo real.',
+  },
+];
+---
+
+<section class="py-18 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <SectionHeader
+      eyebrow="Por qué WSAICO"
+      title="Ingeniería directa, transparente y diseñada para durar."
+      description="Trabajamos como un socio técnico de largo plazo creando plataformas estables y escalables."
+    />
+
+    <div class="mt-12 grid gap-5 md:grid-cols-2">
+      {
+        differentiators.map((item) => (
+          <div class="spotlight-card p-6 sm:p-7">
+            <span class="font-mono text-xs font-bold text-[var(--accent-primary)]">
+              {item.code}
+            </span>
+            <h3 class="mt-3 text-lg font-bold text-[var(--text-primary)]">
+              {item.title}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
+              {item.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

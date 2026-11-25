@@ -1,0 +1,17 @@
+# build output
+dist/
+.vercel/
+.astro/
+
+# dependencies
+node_modules/
+
+# environment variables
+.env
+.env.*
+!.env.example
+
+# logs & os
+npm-debug.log*
+.DS_Store
+Thumbs.db

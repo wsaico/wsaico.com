@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 56" fill="none" aria-hidden="true">
+  <!-- Brazo izquierdo W -->
+  <path d="M4 8H17.5L28.5 33.5L34.5 24.5L39.5 31.5L31.5 43.5C29.6 46.3 25.5 46.1 24 43L4 8Z" fill="currentColor"/>
+  <!-- Diagonal y barra superior S en Electric Cobalt -->
+  <path d="M31.5 8H79L72 17.5H45.5L59 35.5L51.5 45L32.5 20.5C29.5 16.6 29.8 11.2 31.5 8Z" fill="#2563EB"/>
+  <!-- Cierre inferior derecho S -->
+  <path d="M62.5 24.5L75.5 37.5C77.8 39.8 77.6 43.5 75.1 45.6L69 50H54.5L63.5 41.5L56.5 33.5L62.5 24.5Z" fill="currentColor"/>
+</svg>

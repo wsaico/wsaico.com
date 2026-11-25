@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import PortfolioFilter from '@/components/islands/PortfolioFilter';
+import FinalCta from '@/components/sections/FinalCta.astro';
+import { buildBreadcrumbSchema } from '@/lib/schema';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const serialized = projects.map((p) => ({
+  id: p.id,
+  title: p.data.title,
+  subtitle: p.data.subtitle,
+  problem: p.data.problem,
+  result: p.data.result,
+  category: p.data.category,
+  stack: p.data.stack,
+  liveUrl: p.data.liveUrl,
+  liveCtaLabel: p.data.liveCtaLabel,
+}));
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Proyectos', url: '/proyectos' },
+]);
+---
+
+<BaseLayout
+  title="Portafolio de Sistemas y Casos de Estudio | WSAICO"
+  description="Explora Gestor 360°, Inspector 360° (SSOMA Ley SST Perú), paneles operativos, Lumio Finance y plataformas web de alto rendimiento."
+  schemas={[breadcrumb]}
+>
+  <section class="py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="Portafolio Técnico"
+        title="Sistemas diseñados para operar en el mundo real."
+        description="Filtra por categoría o accede directamente a nuestras plataformas en vivo como Gestor 360° e Inspector 360°."
+      />
+
+      <div class="mt-10">
+        <PortfolioFilter client:idle projects={serialized} />
+      </div>
+    </div>
+  </section>
+
+  <FinalCta />
+</BaseLayout>

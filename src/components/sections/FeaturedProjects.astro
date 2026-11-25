@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+
+const featuredProjects = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+---
+
+<section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+    <SectionHeader
+      eyebrow="Portafolio en Producción"
+      title="Sistemas Reales Operando en Tiempo Real"
+      description="Explora nuestros casos de estudio y plataformas desarrolladas a medida."
+    />
+    <a href="/proyectos" class="btn-secondary shrink-0 self-start md:self-auto">
+      Ver todos los proyectos
+    </a>
+  </div>
+
+  <div class="mt-10 grid gap-6 lg:grid-cols-2">
+    {
+      featuredProjects.map((project) => (
+        <article class="spotlight-card reveal-on-scroll flex flex-col justify-between bg-[var(--bg-surface)] p-6 sm:p-8">
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <span class="rounded-full bg-[var(--accent-primary-soft)] px-3 py-1 font-mono text-xs font-bold text-[var(--accent-primary)]">
+                {project.data.category}
+              </span>
+            </div>
+
+            <h3 class="mt-4 text-2xl font-extrabold tracking-tight text-[var(--text-primary)]">
+              <a href={`/proyectos/${project.id}`} class="hover:text-[var(--accent-primary)] transition-colors">
+                {project.data.title}
+              </a>
+            </h3>
+            <p class="mt-1 text-sm font-semibold text-[var(--accent-primary)]">
+              {project.data.subtitle}
+            </p>
+
+            <div class="mt-5 space-y-3 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] p-4 text-sm">
+              <div>
+                <span class="font-mono text-xs font-bold text-[var(--text-subtle)] uppercase">Problema: </span>
+                <span class="text-[var(--text-muted)]">{project.data.problem}</span>
+              </div>
+              <div>
+                <span class="font-mono text-xs font-bold text-[var(--accent-primary)] uppercase">Resultado: </span>
+                <span class="text-[var(--text-secondary)]">{project.data.result}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border-subtle)] pt-5">
+            <div class="flex flex-wrap gap-1.5">
+              {project.data.stack.slice(0, 4).map((tech) => (
+                <span class="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-canvas)] px-2.5 py-1 font-mono text-xs font-medium text-[var(--text-muted)]">
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <a
+                href={`/proyectos/${project.id}`}
+                class="text-xs font-bold text-[var(--text-secondary)] hover:text-[var(--accent-primary)]"
+              >
+                Caso de estudio →
+              </a>
+              {project.data.liveUrl && (
+                <a
+                  href={project.data.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 rounded-full bg-[#2563EB] px-4 py-2 text-xs font-bold text-white shadow-md shadow-blue-600/25 transition-all hover:bg-[#1D4ED8]"
+                >
+                  <span>Ver demo</span>
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                    <path d="M7 17L17 7M7 7h10v10" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

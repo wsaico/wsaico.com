@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import BlogSearch from '@/components/islands/BlogSearch';
+import FinalCta from '@/components/sections/FinalCta.astro';
+import { buildBreadcrumbSchema } from '@/lib/schema';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+
+const formatDate = (d: Date) =>
+  new Intl.DateTimeFormat('es-PE', { day: '2-digit', month: 'short', year: 'numeric' }).format(d);
+
+const serialized = posts.map((p) => ({
+  id: p.id,
+  title: p.data.title,
+  description: p.data.description,
+  category: p.data.category,
+  pubDateFormatted: formatDate(p.data.pubDate),
+}));
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Blog', url: '/blog' },
+]);
+---
+
+<BaseLayout
+  title="Blog de Ingeniería Web, SSOMA Perú y SEO Técnico | WSAICO"
+  description="Artículos prácticos sobre sistemas web a medida, digitalización SSOMA (Ley SST 29783), apps móviles y posicionamiento SEO/SEM."
+  schemas={[breadcrumb]}
+>
+  <section class="py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="Bitácora WSAICO"
+        title="Guías técnicas y decisiones reales de software."
+        description="Contenido escrito desde la práctica diaria desarrollando sistemas en producción."
+      />
+
+      <div class="mt-10">
+        <BlogSearch client:idle posts={serialized} />
+      </div>
+    </div>
+  </section>
+
+  <FinalCta />
+</BaseLayout>

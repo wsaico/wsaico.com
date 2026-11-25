@@ -1,0 +1,160 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import FinalCta from '@/components/sections/FinalCta.astro';
+import { buildBreadcrumbSchema } from '@/lib/schema';
+import { SITE_CONFIG } from '@/config/site';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  category: string;
+  tags: string[];
+  author: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  headings: Heading[];
+  readingMinutes: number;
+  slug: string;
+  relatedServiceSlug?: string;
+}
+
+const {
+  title,
+  description,
+  category,
+  tags,
+  author,
+  pubDate,
+  updatedDate,
+  headings,
+  readingMinutes,
+  slug,
+  relatedServiceSlug,
+} = Astro.props;
+
+const canonical = `${SITE_CONFIG.domain}/blog/${slug}`;
+const formatDate = (d: Date) =>
+  new Intl.DateTimeFormat('es-PE', { day: '2-digit', month: 'long', year: 'numeric' }).format(d);
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  author: { '@type': 'Person', name: author },
+  publisher: { '@id': `${SITE_CONFIG.domain}/#organization` },
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  mainEntityOfPage: canonical,
+};
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: title, url: `/blog/${slug}` },
+]);
+
+const toc = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+
+<BaseLayout
+  title={`${title} | Blog WSAICO`}
+  description={description}
+  canonical={canonical}
+  type="article"
+  publishedTime={pubDate.toISOString()}
+  modifiedTime={(updatedDate ?? pubDate).toISOString()}
+  schemas={[articleSchema, breadcrumb]}
+>
+  <article class="py-14 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <nav aria-label="Breadcrumb" class="mb-6 flex items-center gap-2 font-mono text-xs text-[var(--text-muted)]">
+        <a href="/" class="hover:text-[var(--text-primary)]">Inicio</a>
+        <span>/</span>
+        <a href="/blog" class="hover:text-[var(--text-primary)]">Blog</a>
+        <span>/</span>
+        <span class="text-[var(--accent-primary)]">{category}</span>
+      </nav>
+
+      <header class="max-w-3xl">
+        <div class="flex flex-wrap items-center gap-3 font-mono text-xs text-[var(--text-muted)]">
+          <span class="rounded-full bg-[var(--accent-primary-soft)] px-3 py-1 font-bold text-[var(--accent-primary)]">
+            {category}
+          </span>
+          <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+          <span>·</span>
+          <span>{readingMinutes} min de lectura</span>
+        </div>
+
+        <h1 class="mt-5 text-3xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.14] sm:text-4xl lg:text-5xl">
+          {title}
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-[var(--text-secondary)]">
+          {description}
+        </p>
+        <p class="mt-4 font-mono text-xs text-[var(--text-subtle)]">
+          Por {author} · {SITE_CONFIG.name}
+        </p>
+      </header>
+
+      <div class="mt-12 grid gap-10 border-t border-[var(--border-subtle)] pt-10 lg:grid-cols-12">
+        <div class="space-y-4 text-base leading-relaxed text-[var(--text-secondary)] lg:col-span-8">
+          <slot />
+
+          {
+            tags.length > 0 && (
+              <div class="mt-10 flex flex-wrap gap-2 border-t border-[var(--border-subtle)] pt-6">
+                {tags.map((tag) => (
+                  <span class="rounded-full border border-[var(--border-subtle)] px-3 py-1 font-mono text-xs text-[var(--text-muted)]">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )
+          }
+        </div>
+
+        <aside class="space-y-6 lg:col-span-4">
+          {
+            toc.length > 0 && (
+              <div class="spotlight-card bg-[var(--bg-surface)] p-6 lg:sticky lg:top-24">
+                <p class="font-mono text-xs font-bold text-[var(--accent-primary)] uppercase">
+                  Contenido del artículo
+                </p>
+                <ul class="mt-4 space-y-2.5 text-sm">
+                  {toc.map((h) => (
+                    <li class={h.depth === 3 ? 'pl-3' : ''}>
+                      <a href={`#${h.slug}`} class="text-[var(--text-muted)] transition-colors hover:text-[var(--accent-primary)]">
+                        {h.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+
+                {relatedServiceSlug && (
+                  <div class="mt-6 border-t border-[var(--border-subtle)] pt-5">
+                    <p class="font-mono text-[11px] text-[var(--text-subtle)] uppercase">Servicio relacionado</p>
+                    <a
+                      href={`/servicios/${relatedServiceSlug}`}
+                      class="mt-2 inline-flex items-center gap-1.5 text-sm font-bold text-[var(--accent-primary)] hover:underline"
+                    >
+                      Ver solución técnica →
+                    </a>
+                  </div>
+                )}
+              </div>
+            )
+          }
+        </aside>
+      </div>
+    </div>
+  </article>
+
+  <FinalCta />
+</BaseLayout>

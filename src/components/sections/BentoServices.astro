@@ -1,0 +1,216 @@
+---
+import { getCollection } from 'astro:content';
+
+const allServices = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+
+const flagshipPillars = [
+  {
+    tag: 'Presencia & Crecimiento',
+    title: 'Sitios Web & SEO/SEM',
+    subtitle: 'Velocidad extrema y conversión comercial',
+    ctaLabel: 'Cotizar Sitio o SEO',
+    ctaHref: '/cotizar?servicio=Sitios+Web+y+SEO',
+    featured: false,
+    features: [
+      'Sitios corporativos con Astro 5 (PageSpeed 95+)',
+      'Tiendas online y pasarelas de pago',
+      'SEO técnico, Schema.org y Core Web Vitals',
+      'Landing pages optimizadas para Google Ads (SEM)',
+      'Panel autoadministrable sin tocar código',
+    ],
+  },
+  {
+    tag: 'Sistemas Empresariales',
+    badge: 'Más Solicitado',
+    title: 'Sistemas Web a Medida',
+    subtitle: 'Tu operación completa en una sola plataforma',
+    ctaLabel: 'Cotizar Sistema a Medida',
+    ctaHref: '/cotizar?servicio=Sistemas+Web+a+Medida',
+    featured: true,
+    features: [
+      'Paneles operativos y dashboards en tiempo real',
+      'Arquitectura Next.js + TypeScript + Supabase',
+      'Control de usuarios, roles, turnos y auditoría',
+      'Automatización de reportes PDF / Excel',
+      '100% código fuente propio sin pago por usuario',
+      'Soporte directo y evolución continua',
+    ],
+  },
+  {
+    tag: 'Movilidad & Campo',
+    title: 'Apps & Sistemas de Campo',
+    subtitle: 'Operación móvil, inspecciones y trazabilidad',
+    ctaLabel: 'Cotizar App o Sistema',
+    ctaHref: '/cotizar?servicio=Aplicaciones+Moviles',
+    featured: false,
+    features: [
+      'Apps iOS y Android con React Native y Expo',
+      'Inspecciones digitales de campo y equipos',
+      'Actas digitales con firma en pantalla y fotos',
+      'Cumplimiento normativo y trazabilidad en nube',
+      'Sincronización con tu sistema web central',
+    ],
+  },
+];
+---
+
+<!-- BLOQUE 1: Las 3 Tarjetas Verticales Escultóricas -->
+<section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  <div class="reveal-on-scroll mx-auto max-w-2xl text-center">
+    <h2 class="text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-4xl">
+      Soluciones Transparentes y a la Medida de tu Operación
+    </h2>
+    <p class="mt-3 text-base text-[var(--text-muted)]">
+      Sin tarifas ocultas ni plantillas genéricas. Elige la línea de ingeniería que tu empresa necesita hoy.
+    </p>
+  </div>
+
+  <div class="mt-12 grid items-stretch gap-6 lg:grid-cols-3">
+    {
+      flagshipPillars.map((pillar) => (
+        <div
+          class:list={[
+            'reveal-on-scroll flex flex-col justify-between rounded-[28px] p-7 transition-all duration-300 sm:p-8',
+            pillar.featured
+              ? 'bg-[#0B1B3F] text-white shadow-2xl ring-2 ring-[#2563EB]/60 lg:-translate-y-2'
+              : 'spotlight-card bg-[var(--bg-surface)] text-[var(--text-primary)]',
+          ]}
+        >
+          <div>
+            <div class="flex items-center justify-between gap-2">
+              <span
+                class:list={[
+                  'font-mono text-xs font-bold uppercase',
+                  pillar.featured ? 'text-blue-300' : 'text-[var(--text-muted)]',
+                ]}
+              >
+                {pillar.tag}
+              </span>
+              {pillar.badge && (
+                <span class="rounded-full border border-blue-400/40 bg-[#2563EB]/25 px-3 py-1 font-mono text-[11px] font-bold text-blue-200">
+                  {pillar.badge}
+                </span>
+              )}
+            </div>
+
+            <h3
+              class:list={[
+                'mt-4 text-2xl font-extrabold tracking-tight sm:text-3xl',
+                pillar.featured ? 'text-white' : 'text-[var(--text-primary)]',
+              ]}
+            >
+              {pillar.title}
+            </h3>
+            <p
+              class:list={[
+                'mt-1.5 text-sm',
+                pillar.featured ? 'text-slate-300' : 'text-[var(--text-muted)]',
+              ]}
+            >
+              {pillar.subtitle}
+            </p>
+
+            <a
+              href={pillar.ctaHref}
+              class="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-[#2563EB] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/30 transition-all hover:bg-[#1D4ED8]"
+            >
+              {pillar.ctaLabel}
+            </a>
+
+            <ul class="mt-7 space-y-3 text-sm">
+              {pillar.features.map((feat) => (
+                <li class="flex items-start gap-2.5">
+                  <svg
+                    class:list={[
+                      'mt-0.5 h-4 w-4 shrink-0',
+                      pillar.featured ? 'text-blue-400' : 'text-[#2563EB]',
+                    ]}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    aria-hidden="true"
+                  >
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  <span class={pillar.featured ? 'text-slate-200' : 'text-[var(--text-secondary)]'}>
+                    {feat}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<!-- BLOQUE 2: Sección Dividida en 2 Columnas -->
+<section class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  <div class="grid items-start gap-12 lg:grid-cols-12">
+    <div class="reveal-on-scroll lg:sticky lg:top-28 lg:col-span-5">
+      <div class="inline-flex items-center gap-2 rounded-full bg-[var(--accent-primary-soft)] px-3.5 py-1.5">
+        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-[#2563EB] font-mono text-[10px] font-bold text-white">
+          WS
+        </span>
+        <span class="font-mono text-xs font-bold text-[var(--accent-primary)]">
+          Soluciones Integrales
+        </span>
+      </div>
+
+      <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.12] sm:text-4xl">
+        Todo lo que Necesitas para Hacer Crecer tu Negocio
+      </h2>
+
+      <p class="mt-4 text-base leading-relaxed text-[var(--text-muted)]">
+        Herramientas potentes y desarrollos a medida para automatizar procesos, conectar a tu equipo y escalar tus operaciones más rápido.
+      </p>
+
+      <div class="mt-8">
+        <a href="/servicios" class="btn-primary">
+          <span>Explorar Todos los Servicios</span>
+          <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/20">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="space-y-4 lg:col-span-7">
+      {
+        allServices.map((service) => (
+          <a
+            href={`/servicios/${service.id}`}
+            class="spotlight-card reveal-on-scroll group flex items-center justify-between gap-4 rounded-2xl bg-[var(--bg-surface)] p-5 no-underline sm:p-6"
+          >
+            <div class="flex items-start gap-4">
+              <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#2563EB] text-white shadow-lg shadow-blue-600/30 transition-transform duration-300 group-hover:scale-105">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="4" />
+                  <path d="M9 12l2 2 4-4" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-lg font-extrabold text-[#2563EB] group-hover:underline">
+                  {service.data.title}
+                </h3>
+                <p class="mt-1 text-sm leading-relaxed text-[var(--text-muted)]">
+                  {service.data.description}
+                </p>
+              </div>
+            </div>
+
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[var(--text-secondary)] transition-transform duration-200 group-hover:translate-x-1 group-hover:text-[#2563EB]">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+---
+title: "Dashboard Operativo Gerencial"
+subtitle: "Consolidación Automática de KPIs y Productividad Multi-Sede"
+summary: "Centro de mando ejecutivo que unifica datos dispersos de operaciones, asistencia y cumplimiento de metas en indicadores visuales claros para toma de decisiones."
+problem: "La gerencia recibía reportes semanales armados manualmente en hojas de cálculo con riesgo de fórmulas rotas y datos desactualizados."
+solution: "Pipeline de ingesta y normalización automática sobre PostgreSQL con vistas analíticas interactivas, filtros por rango de fechas/sede y exportación ejecutiva."
+result: "Información confiable disponible cada mañana sin intervención manual del equipo administrativo."
+metrics:
+  - "Cero consolidación manual de Excel"
+  - "Filtros dinámicos por sede, turno y área"
+  - "Exportación ejecutiva en segundos"
+stack: ["Next.js", "TypeScript", "PostgreSQL", "Supabase", "Recharts"]
+category: "Operaciones"
+featured: false
+order: 4
+date: 2025-05-12
+---
+
+### De Datos Dispersos a Decisiones Claras
+
+El objetivo técnico fue eliminar la latencia entre que ocurre un evento operativo y el momento en que la gerencia puede analizarlo. Se implementaron vistas materializadas en PostgreSQL para mantener tiempos de respuesta por debajo de 150 ms incluso con decenas de miles de registros históricos.

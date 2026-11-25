@@ -1,0 +1,106 @@
+---
+import BrandLogo from '@/components/ui/BrandLogo.astro';
+import { SITE_CONFIG } from '@/config/site';
+import { t } from '@/lib/i18n';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="mx-auto w-full max-w-7xl px-4 pb-8 pt-6 sm:px-6 lg:px-8">
+  <div class="rounded-[32px] bg-[#0B1B3F] px-6 py-12 text-white shadow-2xl ring-1 ring-white/10 sm:px-10 lg:px-12 lg:py-14">
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-12">
+      <!-- Marca -->
+      <div class="lg:col-span-4">
+        <BrandLogo variant="dark-surface" class="h-10" />
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-slate-300">
+          Arquitectura y desarrollo de sistemas web a medida, aplicaciones móviles y soluciones digitales de alto rendimiento.
+        </p>
+      </div>
+
+      <!-- Navegación -->
+      <div class="lg:col-span-2">
+        <h2 class="font-mono text-xs font-bold tracking-wider text-blue-400 uppercase">
+          Secciones
+        </h2>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          {
+            SITE_CONFIG.nav.map((item) => (
+              <li>
+                <a href={item.href} class="text-slate-300 transition-colors hover:text-white">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href="/cotizar" class="font-bold text-[#60A5FA] hover:underline">
+              {t('ctaQuote')}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Proyectos Destacados -->
+      <div class="lg:col-span-3">
+        <h2 class="font-mono text-xs font-bold tracking-wider text-blue-400 uppercase">
+          Proyectos
+        </h2>
+        <ul class="mt-4 space-y-3 text-sm">
+          <li>
+            <a href="/proyectos/gestor-360" class="font-semibold text-slate-200 transition-colors hover:text-white">
+              Gestor 360°
+            </a>
+            <p class="text-xs text-slate-400">Gestión y control operativo</p>
+          </li>
+          <li>
+            <a href="/proyectos/inspector-360-ssoma" class="font-semibold text-slate-200 transition-colors hover:text-white">
+              Inspector 360°
+            </a>
+            <p class="text-xs text-slate-400">Inspecciones digitales de campo</p>
+          </li>
+          <li>
+            <a href="/proyectos/lumio-finance" class="font-semibold text-slate-200 transition-colors hover:text-white">
+              Lumio Finance
+            </a>
+            <p class="text-xs text-slate-400">Control financiero y flujo de caja</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contacto -->
+      <div class="lg:col-span-3">
+        <h2 class="font-mono text-xs font-bold tracking-wider text-blue-400 uppercase">
+          Contacto Directo
+        </h2>
+        <ul class="mt-4 space-y-2.5 text-sm text-slate-300">
+          <li>
+            <a href={`mailto:${SITE_CONFIG.contact.email}`} class="transition-colors hover:text-white">
+              {SITE_CONFIG.contact.email}
+            </a>
+          </li>
+          <li>
+            <a
+              href={SITE_CONFIG.contact.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition-colors hover:text-white"
+            >
+              WhatsApp: {SITE_CONFIG.contact.phoneDisplay}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center">
+      <p>
+        © {currentYear} {SITE_CONFIG.name}. {t('copyright')}
+      </p>
+      <div class="flex flex-wrap items-center gap-5">
+        <a href="/politica-privacidad" class="hover:text-white">Política de Privacidad</a>
+        <a href="/terminos" class="hover:text-white">Términos de Servicio</a>
+        <a href="/rss.xml" class="hover:text-white">RSS</a>
+      </div>
+    </div>
+  </div>
+</footer>

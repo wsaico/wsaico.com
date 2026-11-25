@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import QuoteWizard from '@/components/islands/QuoteWizard';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import { SITE_CONFIG } from '@/config/site';
+
+const initialService = Astro.url.searchParams.get('servicio') ?? '';
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<BaseLayout
+  title="Solicitar Cotización | WSAICO"
+  description="Cuéntame qué sistema web, plataforma SSOMA o aplicación móvil necesitas. Recibe una propuesta clara por hitos en menos de 24 horas."
+>
+  <section class="py-14 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="Cotización Guiada"
+        title="Cuéntame sobre tu proyecto en 4 pasos rápidos."
+        description="Sin compromisos ni letras pequeñas. También puedes escribirme directo por WhatsApp si prefieres conversar ahora."
+      />
+
+      <div class="mt-10">
+        <QuoteWizard client:load initialService={initialService} />
+      </div>
+
+      {
+        turnstileSiteKey && (
+          <div class="cf-turnstile mt-4" data-sitekey={turnstileSiteKey} data-theme="dark" />
+        )
+      }
+
+      <div class="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5 text-sm">
+        <p class="text-[var(--text-secondary)]">
+          ¿Prefieres hablar directamente con Wilber Saico?
+        </p>
+        <a
+          href={SITE_CONFIG.contact.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold text-[var(--accent-primary)] hover:underline"
+        >
+          WhatsApp: {SITE_CONFIG.contact.phoneDisplay} →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {
+    turnstileSiteKey && (
+      <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+    )
+  }
+</BaseLayout>

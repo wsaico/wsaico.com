@@ -1,0 +1,207 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '@fontsource-variable/manrope';
+import '@fontsource-variable/jetbrains-mono';
+import '@/styles/global.css';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import WhatsAppFab from '@/components/layout/WhatsAppFab.astro';
+import { SITE_CONFIG } from '@/config/site';
+import { t } from '@/lib/i18n';
+import { resolveCanonical, resolveOgImage, resolveTitle, type SeoProps } from '@/lib/seo';
+import { buildOrganizationSchema, buildWebSiteSchema } from '@/lib/schema';
+
+interface Props extends SeoProps {
+  schemas?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  image,
+  type = 'website',
+  noindex = false,
+  publishedTime,
+  modifiedTime,
+  schemas = [],
+} = Astro.props;
+
+const fullTitle = resolveTitle(title);
+const canonicalUrl = resolveCanonical(Astro.url.pathname, canonical);
+const ogImageUrl = resolveOgImage(Astro.url.pathname, image);
+
+const allSchemas = [buildOrganizationSchema(), buildWebSiteSchema(), ...schemas];
+---
+
+<!doctype html>
+<html lang={SITE_CONFIG.lang} data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="es-PE" href={canonicalUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE_CONFIG.name} Blog`} href="/rss.xml" />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:locale" content={SITE_CONFIG.locale} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={`${SITE_CONFIG.name} — ${SITE_CONFIG.tagline}`} />
+    <meta property="og:image" content={ogImageUrl} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Inicialización instantánea del tema (soporta Claro / Oscuro sin parpadeo) -->
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('wsaico-theme');
+          var theme = saved === 'dark' || saved === 'light' ? saved : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
+
+    {
+      allSchemas.map((schema) => (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+      ))
+    }
+
+    <ClientRouter />
+  </head>
+  <body class="flex min-h-dvh flex-col bg-[var(--bg-canvas)] text-[var(--text-primary)]">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-[var(--accent-primary)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+    >
+      {t('skipToContent')}
+    </a>
+
+    <Header />
+
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+    <WhatsAppFab />
+
+    <!-- Motor global de Tema (Dark/Light), Scroll Reveal, Spotlight y 3D Tilt -->
+    <script is:inline>
+      (function () {
+        function syncThemeUI() {
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var sunIcons = document.querySelectorAll('.theme-icon-sun');
+          var moonIcons = document.querySelectorAll('.theme-icon-moon');
+          var labels = document.querySelectorAll('.theme-label-text');
+          sunIcons.forEach(function (el) {
+            el.classList.toggle('hidden', !isDark);
+          });
+          moonIcons.forEach(function (el) {
+            el.classList.toggle('hidden', isDark);
+          });
+          labels.forEach(function (el) {
+            el.textContent = isDark ? 'Claro' : 'Oscuro';
+          });
+        }
+
+        function initInteractions() {
+          syncThemeUI();
+
+          // Scroll reveal animations
+          var reveals = document.querySelectorAll('.reveal-on-scroll');
+          if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(
+              function (entries) {
+                entries.forEach(function (entry) {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    io.unobserve(entry.target);
+                  }
+                });
+              },
+              { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+            );
+            reveals.forEach(function (el) {
+              io.observe(el);
+            });
+          } else {
+            reveals.forEach(function (el) {
+              el.classList.add('is-visible');
+            });
+          }
+
+          // Spotlight cursor tracking
+          var cards = document.querySelectorAll('.spotlight-card');
+          cards.forEach(function (card) {
+            card.addEventListener(
+              'pointermove',
+              function (e) {
+                var rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', e.clientX - rect.left + 'px');
+                card.style.setProperty('--mouse-y', e.clientY - rect.top + 'px');
+              },
+              { passive: true },
+            );
+          });
+        }
+
+        // Delegación global de clics para que el botón de tema y menú móvil SIEMPRE funcionen
+        if (!window.__wsaicoDelegated) {
+          window.__wsaicoDelegated = true;
+          document.addEventListener('click', function (e) {
+            var target = e.target;
+            if (!target || !target.closest) return;
+
+            var themeBtn = target.closest('#theme-toggle');
+            if (themeBtn) {
+              var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+              var next = current === 'dark' ? 'light' : 'dark';
+              document.documentElement.setAttribute('data-theme', next);
+              try {
+                localStorage.setItem('wsaico-theme', next);
+              } catch (err) {}
+              syncThemeUI();
+              return;
+            }
+
+            var menuBtn = target.closest('#mobile-menu-btn');
+            if (menuBtn) {
+              var drawer = document.getElementById('mobile-drawer');
+              var expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+              menuBtn.setAttribute('aria-expanded', String(!expanded));
+              if (drawer) drawer.classList.toggle('hidden', expanded);
+            }
+          });
+        }
+
+        initInteractions();
+        document.addEventListener('astro:after-swap', function () {
+          try {
+            var saved = localStorage.getItem('wsaico-theme');
+            if (saved === 'dark' || saved === 'light') {
+              document.documentElement.setAttribute('data-theme', saved);
+            }
+          } catch (e) {}
+          initInteractions();
+        });
+      })();
+    </script>
+  </body>
+</html>

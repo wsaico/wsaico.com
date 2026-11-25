@@ -1,0 +1,52 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import { SITE_CONFIG } from '@/config/site';
+import { buildBreadcrumbSchema } from '@/lib/schema';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Contacto', url: '/contacto' },
+]);
+---
+
+<BaseLayout
+  title="Contacto Directo | WSAICO"
+  description="Comunícate directamente con Wilber Saico por WhatsApp (+51 902 895 21), correo electrónico (wilber@wsaico.com) o mediante nuestro cotizador guiado."
+  schemas={[breadcrumb]}
+>
+  <section class="py-16 sm:py-24">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        eyebrow="Canales Directos"
+        title="Hablemos de tu proyecto sin intermediarios."
+        description="Respuesta directa para empresas y equipos que buscan desarrollar o escalar sus plataformas digitales."
+      />
+
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        <a
+          href={SITE_CONFIG.contact.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="spotlight-card bg-[var(--bg-surface)] p-6 no-underline"
+        >
+          <p class="font-mono text-xs font-bold text-emerald-500 uppercase">WhatsApp Directo</p>
+          <p class="mt-3 text-xl font-extrabold text-[var(--text-primary)]">{SITE_CONFIG.contact.phoneDisplay}</p>
+          <p class="mt-2 text-sm text-[var(--text-muted)]">Respuesta rápida para consultas puntuales o agendar una reunión.</p>
+        </a>
+
+        <a href={`mailto:${SITE_CONFIG.contact.email}`} class="spotlight-card bg-[var(--bg-surface)] p-6 no-underline">
+          <p class="font-mono text-xs font-bold text-[var(--accent-primary)] uppercase">Correo Electrónico</p>
+          <p class="mt-3 text-xl font-extrabold text-[var(--text-primary)]">{SITE_CONFIG.contact.email}</p>
+          <p class="mt-2 text-sm text-[var(--text-muted)]">Ideal para enviarme requerimientos técnicos o términos de referencia.</p>
+        </a>
+
+        <a href="/cotizar" class="spotlight-card bg-[var(--bg-surface)] p-6 no-underline">
+          <p class="font-mono text-xs font-bold text-[var(--accent-primary)] uppercase">Cotizador Guiado</p>
+          <p class="mt-3 text-xl font-extrabold text-[var(--text-primary)]">Formulario en 4 pasos</p>
+          <p class="mt-2 text-sm text-[var(--text-muted)]">Define alcance, módulos y plazo para recibir una propuesta estructurada.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

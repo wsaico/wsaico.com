@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '@/config/site';
+---
+
+<BaseLayout
+  title="Política de Privacidad | WSAICO"
+  description="Política de tratamiento y protección de datos personales de WSAICO (wsaico.com)."
+>
+  <section class="py-16 sm:py-24">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-extrabold text-[var(--text-primary)] sm:text-4xl">Política de Privacidad</h1>
+      <div class="mt-8 space-y-5 text-sm leading-relaxed text-[var(--text-secondary)]">
+        <p>
+          En <strong>{SITE_CONFIG.name}</strong> respetamos la privacidad de los datos que nos compartes a través de <strong>wsaico.com</strong> conforme a la Ley N.° 29733 (Ley de Protección de Datos Personales del Perú).
+        </p>
+        <p>
+          Los datos ingresados en el formulario de cotización (nombre, empresa, correo electrónico, número de WhatsApp y descripción del proyecto) se utilizan exclusivamente para responder tu solicitud, elaborar una propuesta técnica y mantener comunicación comercial directa contigo.
+        </p>
+        <p>
+          No vendemos, alquilamos ni cedemos tus datos a terceros. Si deseas actualizar o eliminar tu información de nuestros registros, escribe directamente a <a href={`mailto:${SITE_CONFIG.contact.email}`} class="text-[var(--accent-primary)] underline">{SITE_CONFIG.contact.email}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
