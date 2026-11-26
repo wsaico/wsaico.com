@@ -1,0 +1,78 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '@/config/site';
+
+const lastUpdated = '25 de noviembre de 2026';
+---
+
+<BaseLayout
+  title="Política de Cookies | WSAICO"
+  description="Información clara sobre las cookies y almacenamiento local utilizados en wsaico.com."
+>
+  <section class="py-16 sm:py-24">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <p class="font-mono text-xs font-bold tracking-wider text-[var(--accent-primary)] uppercase">
+        Documento Legal · Última actualización: {lastUpdated}
+      </p>
+      <h1 class="mt-3 text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-4xl">
+        Política de Cookies y Almacenamiento Local
+      </h1>
+
+      <div class="mt-10 space-y-8 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
+        <section class="space-y-2.5">
+          <h2 class="text-lg font-extrabold text-[var(--text-primary)]">1. ¿Qué son las cookies y el almacenamiento local?</h2>
+          <p>
+            Son pequeños archivos o registros que el navegador guarda en tu dispositivo para recordar tus preferencias técnicas (como el tema visual o la aceptación de este aviso) y proteger los formularios contra envío automatizado de spam.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-lg font-extrabold text-[var(--text-primary)]">2. Elementos que utilizamos en wsaico.com</h2>
+          <div class="overflow-x-auto rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)]">
+            <table class="w-full text-left text-xs sm:text-sm">
+              <thead class="border-b border-[var(--border-subtle)] bg-[var(--bg-surface-2)] font-mono uppercase">
+                <tr>
+                  <th class="px-4 py-3">Nombre</th>
+                  <th class="px-4 py-3">Tipo</th>
+                  <th class="px-4 py-3">Finalidad</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[var(--border-subtle)]">
+                <tr>
+                  <td class="px-4 py-3 font-mono font-semibold">wsaico-theme</td>
+                  <td class="px-4 py-3">Técnica (localStorage)</td>
+                  <td class="px-4 py-3">Recordar si prefieres Modo Claro o Modo Oscuro.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-mono font-semibold">wsaico-legal-consent</td>
+                  <td class="px-4 py-3">Técnica (localStorage)</td>
+                  <td class="px-4 py-3">Guardar tu aceptación de términos, privacidad y cookies.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-mono font-semibold">wsaico-quote-draft</td>
+                  <td class="px-4 py-3">Funcional (sessionStorage)</td>
+                  <td class="px-4 py-3">Evitar que pierdas tu avance en el cotizador mientras navegas.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-mono font-semibold">cf_clearance / Turnstile</td>
+                  <td class="px-4 py-3">Seguridad (Terceros)</td>
+                  <td class="px-4 py-3">Protección anti-spam de Cloudflare en el formulario de cotización.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="space-y-2.5">
+          <h2 class="text-lg font-extrabold text-[var(--text-primary)]">3. Cómo gestionar o desactivar cookies</h2>
+          <p>
+            Puedes borrar o bloquear las cookies y el almacenamiento local en cualquier momento desde la configuración de privacidad de tu navegador (Chrome, Edge, Firefox o Safari). Ten en cuenta que desactivar los elementos técnicos esenciales puede restablecer tus preferencias de tema visual.
+          </p>
+          <p>
+            Si tienes dudas sobre esta política, escríbenos a <a href={`mailto:${SITE_CONFIG.contact.email}`} class="font-semibold text-[var(--accent-primary)] underline">{SITE_CONFIG.contact.email}</a>.
+          </p>
+        </section>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

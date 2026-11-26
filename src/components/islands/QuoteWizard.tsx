@@ -33,6 +33,7 @@ export default function QuoteWizard({ initialService = '' }: Props) {
   const [company, setCompany] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [email, setEmail] = useState('');
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -80,6 +81,11 @@ export default function QuoteWizard({ initialService = '' }: Props) {
 
     if (fullName.trim().length < 2 || whatsapp.trim().length < 6 || !email.includes('@')) {
       setErrorMsg('Completa tu nombre, número de WhatsApp y correo electrónico válido.');
+      return;
+    }
+
+    if (!acceptedTerms) {
+      setErrorMsg('Debes aceptar la Política de Privacidad y los Términos y Condiciones para enviar tu solicitud.');
       return;
     }
 
@@ -345,6 +351,26 @@ export default function QuoteWizard({ initialService = '' }: Props) {
               />
             </div>
           </div>
+
+          <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)]/60 p-3.5 text-xs leading-relaxed text-[var(--text-secondary)]">
+            <input
+              type="checkbox"
+              checked={acceptedTerms}
+              onChange={(e) => setAcceptedTerms((e.target as HTMLInputElement).checked)}
+              class="mt-0.5 h-4 w-4 shrink-0 accent-[#2563EB]"
+            />
+            <span>
+              He leído y acepto la{' '}
+              <a href="/politica-privacidad" target="_blank" class="font-semibold text-[var(--accent-primary)] underline">
+                Política de Privacidad
+              </a>{' '}
+              y los{' '}
+              <a href="/terminos" target="_blank" class="font-semibold text-[var(--accent-primary)] underline">
+                Términos y Condiciones
+              </a>{' '}
+              para el tratamiento de mis datos conforme a la Ley N.° 29733.
+            </span>
+          </label>
         </div>
       )}
 

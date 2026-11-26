@@ -1,25 +1,65 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { SITE_CONFIG } from '@/config/site';
+
+const lastUpdated = '25 de noviembre de 2026';
 ---
 
 <BaseLayout
-  title="Términos de Servicio | WSAICO"
-  description="Condiciones generales de uso del sitio web wsaico.com y contratación de servicios de desarrollo."
+  title="Términos y Condiciones de Servicio | WSAICO"
+  description="Términos y condiciones de uso del sitio web wsaico.com, demostraciones en línea y contratación de servicios de desarrollo."
 >
   <section class="py-16 sm:py-24">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-extrabold text-[var(--text-primary)] sm:text-4xl">Términos de Servicio</h1>
-      <div class="mt-8 space-y-5 text-sm leading-relaxed text-[var(--text-secondary)]">
-        <p>
-          El contenido publicado en <strong>wsaico.com</strong> tiene carácter informativo sobre los servicios de ingeniería de software, consultoría técnica y plataformas desarrolladas por <strong>{SITE_CONFIG.name}</strong>.
-        </p>
-        <p>
-          Todo proyecto de desarrollo se formaliza mediante propuesta de alcance por escrito, cronograma de entregas y acuerdo de hitos aprobado por el cliente antes del inicio de ejecución.
-        </p>
-        <p>
-          Las demostraciones públicas de sistemas como <strong>Gestor 360°</strong> e <strong>Inspector 360°</strong> están destinadas exclusivamente a evaluación funcional. Para consultas comerciales o soporte, escribe a <a href={`mailto:${SITE_CONFIG.contact.email}`} class="text-[var(--accent-primary)] underline">{SITE_CONFIG.contact.email}</a>.
-        </p>
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <p class="font-mono text-xs font-bold tracking-wider text-[var(--accent-primary)] uppercase">
+        Documento Legal · Última actualización: {lastUpdated}
+      </p>
+      <h1 class="mt-3 text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-4xl">
+        Términos y Condiciones de Uso
+      </h1>
+
+      <div class="mt-10 space-y-8 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
+        <section class="space-y-2.5">
+          <h2 class="text-lg font-extrabold text-[var(--text-primary)]">1. Aceptación de los Términos</h2>
+          <p>
+            Al acceder, navegar o utilizar los formularios y enlaces de <strong>wsaico.com</strong>, aceptas quedar sujeto a los presentes Términos y Condiciones, así como a nuestra <a href="/politica-privacidad" class="text-[var(--accent-primary)] underline">Política de Privacidad</a> y <a href="/politica-cookies" class="text-[var(--accent-primary)] underline">Política de Cookies</a>.
+          </p>
+        </section>
+
+        <section class="space-y-2.5">
+          <h2 class="text-lg font-extrabold text-[var(--text-primary)]">2. Naturaleza Informativa y Cotizaciones</h2>
+          <p>
+            La información publicada sobre servicios, arquitectura tecnológica y plazos referenciales tiene carácter informativo. El envío de una solicitud mediante el formulario de cotización no constituye un contrato vinculante ni genera obligación de prestación de servicios hasta que ambas partes aprueben por escrito la propuesta formal de alcance, cronograma, hitos de pago y entregables.
+          </p>
+        </section>
+
+        <section class="space-y-2.5">
+          <h2 class="text-lg font-extrabold text-[var(--text-primary)]">3. Propiedad Intelectual</h2>
+          <p>
+            El nombre comercial <strong>WSAICO</strong>, su isotipo, diseños gráficos, textos, código fuente de este sitio web y materiales técnicos publicados son propiedad exclusiva de <strong>{SITE_CONFIG.author.name}</strong>. Queda prohibida su reproducción, distribución o uso comercial no autorizado.
+          </p>
+        </section>
+
+        <section class="space-y-2.5">
+          <h2 class="text-lg font-extrabold text-[var(--text-primary)]">4. Uso de Plataformas de Demostración en Vivo</h2>
+          <p>
+            Los enlaces hacia plataformas externas de demostración (tales como <strong>Gestor 360°</strong> o <strong>Inspector 360°</strong>) se ofrecen exclusivamente con fines de evaluación funcional. El usuario se compromete a no ingresar datos personales confidenciales reales de terceros en entornos de prueba públicos, ni realizar pruebas de carga, intrusión o ingeniería inversa sin autorización previa por escrito.
+          </p>
+        </section>
+
+        <section class="space-y-2.5">
+          <h2 class="text-lg font-extrabold text-[var(--text-primary)]">5. Limitación de Responsabilidad</h2>
+          <p>
+            <strong>WSAICO</strong> procura mantener el sitio web disponible y libre de errores técnicos; sin embargo, no garantiza la disponibilidad ininterrumpida ante fallos de red, mantenimiento de infraestructura externa o fuerza mayor, ni se responsabiliza por el contenido de sitios web de terceros enlazados desde esta plataforma.
+          </p>
+        </section>
+
+        <section class="space-y-2.5">
+          <h2 class="text-lg font-extrabold text-[var(--text-primary)]">6. Legislación Aplicable y Jurisdicción</h2>
+          <p>
+            Estos Términos y Condiciones se rigen por las leyes de la <strong>República del Perú</strong>. Para cualquier consulta o controversia derivada del uso de este sitio web, puedes comunicarte primero al correo <a href={`mailto:${SITE_CONFIG.contact.email}`} class="font-semibold text-[var(--accent-primary)] underline">{SITE_CONFIG.contact.email}</a>.
+          </p>
+        </section>
       </div>
     </div>
   </section>
